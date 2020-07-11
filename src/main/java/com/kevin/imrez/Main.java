@@ -1,9 +1,9 @@
 package com.kevin.imrez;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String [] arg) {
@@ -14,16 +14,32 @@ public class Main {
 //        scanner.close();
 //        System.out.println(folderLocation);
 
-        String fromPath = "C:\\Users\\Kevin\\Pictures\\april.jpg";
+        String fromPath = "C:\\Users\\Kevin\\Pictures\\";
         String toPath = "C:\\Users\\Kevin\\Desktop\\";
 
-        File file = new File(fromPath);
+        Pattern imagePattern = Pattern.compile("(.*)(.jpg|.png)");
+        Matcher imageMatcher;
 
-        try {
-            Files.copy(file.toPath(), new File(toPath + file.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
+        File [] files = new File(fromPath).listFiles();
+
+        ArrayList<File> images = new ArrayList<>();
+
+        for (File file : files) {
+            imageMatcher = imagePattern.matcher(file.toString());
+
+            if (file.isFile() && imageMatcher.matches())
+                images.add(file);
         }
+
+        for (Object image: images) {
+            System.out.println(image);
+        }
+
+//        try {
+//            Files.copy(file.toPath(), new File(toPath + file.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
     }
