@@ -1,10 +1,13 @@
 package com.kevin.imrez;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,19 +44,27 @@ public class Main {
             }
         }
 
-        for (Image image: images) {
-            System.out.println("name: " + image.getName() +
-                    "  width: " + image.getImage().getWidth() +
-                    "  height: " + image.getImage().getHeight());
-        }
+        java.awt.Image tmp = images.get(0).getImage().getScaledInstance(1000, 1000, java.awt.Image.SCALE_SMOOTH);
+        BufferedImage sajt = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);
+        Graphics2D alma = sajt.createGraphics();
+        alma.drawImage(tmp, 0, 0, null);
+        alma.dispose();
 
         try {
+
+            ImageIO.write(sajt, images.get(0).getName().split("\\.")[1], new File(toPath + images.get(1).getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+/*        try {
             for (Image image : images) {
                 ImageIO.write(image.getImage(), image.getName().split("\\.")[1], new File(toPath + image.getName()));
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 }
