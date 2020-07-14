@@ -1,8 +1,6 @@
 package com.kevin.imrez;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -41,15 +39,8 @@ public class Main {
         }
 
         for(ImageData image : images) {
-            Image imageTmp = image.getImage().getScaledInstance((int) (image.getImage().getWidth() * image.getScale()), (int) (image.getImage().getHeight() * image.getScale()), Image.SCALE_SMOOTH);
-            BufferedImage sajt = new BufferedImage((int) (image.getImage().getWidth() * image.getScale()), (int) (image.getImage().getHeight() * image.getScale()), BufferedImage.TYPE_INT_RGB);
-            Graphics2D alma = sajt.createGraphics();
-            alma.drawImage(imageTmp, 0, 0, null);
-            alma.dispose();
-
             try {
-
-                ImageIO.write(sajt, image.getType(), new File(toPath + image.getGUID() + "." + image.getType()));
+                ImageIO.write(image.scaledImage(), image.getType(), new File(toPath + image.getGUID() + "." + image.getType()));
 
                 System.out.println("name: " + toPath + image.getGUID() + "." +  image.getType());
 
@@ -57,14 +48,5 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
-/*        try {
-            for (Image image : images) {
-                ImageIO.write(image.getImage(), image.getName().split("\\.")[1], new File(toPath + image.getName()));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
     }
 }

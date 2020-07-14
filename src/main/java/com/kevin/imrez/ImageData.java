@@ -1,5 +1,6 @@
 package com.kevin.imrez;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.UUID;
 
@@ -34,6 +35,19 @@ public class ImageData {
         } else {
             return (double)1000/Math.max(image.getWidth(), image.getHeight());
         }
+    }
+
+    public BufferedImage scaledImage() {
+        if (needScaling()) {
+            Image imageTmp = image.getScaledInstance((int) (image.getWidth() * getScale()), (int) (image.getHeight() * getScale()), Image.SCALE_SMOOTH);
+            BufferedImage bufferedImageTmp = new BufferedImage((int) (image.getWidth() * getScale()), (int) (image.getHeight() * getScale()), BufferedImage.TYPE_INT_RGB);
+            Graphics2D alma = bufferedImageTmp.createGraphics();
+            alma.drawImage(imageTmp, 0, 0, null);
+            alma.dispose();
+
+            return bufferedImageTmp;
+        }
+        return image;
     }
 
 
