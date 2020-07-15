@@ -21,7 +21,7 @@ public class ImageData {
 
     public String getGUID() { return GUID; }
 
-    public String getType() { return name.split("\\.")[1]; }
+    public String getType() { return name.substring(name.lastIndexOf(".") + 1).toLowerCase(); }
 
     public BufferedImage getImage() { return image; }
 

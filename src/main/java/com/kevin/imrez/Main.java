@@ -2,6 +2,8 @@ package com.kevin.imrez;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,7 +19,6 @@ public class Main {
 
         String fromPath = "C:\\Users\\Kevin\\Pictures\\";
         String toPath = "C:\\Users\\Kevin\\Desktop\\Pictures\\";
-
 
         Pattern imagePattern = Pattern.compile("(.*)(.jpg|.png)", Pattern.CASE_INSENSITIVE);
         Matcher imageMatcher;
