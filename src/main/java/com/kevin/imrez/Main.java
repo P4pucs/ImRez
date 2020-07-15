@@ -2,8 +2,6 @@ package com.kevin.imrez;
 
 import javax.imageio.ImageIO;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +20,18 @@ public class Main {
 
         Pattern imagePattern = Pattern.compile("(.*)(.jpg|.png)", Pattern.CASE_INSENSITIVE);
         Matcher imageMatcher;
+
+        File tmp = new File(fromPath);
+        if(!(tmp.exists() || tmp.isDirectory())) {
+            System.out.println("filepath not found");
+            return;
+        }
+
+        File IEAIAIO = new File(toPath);
+        if(!(IEAIAIO.exists() || IEAIAIO.isDirectory())) {
+            System.out.println("Directory not found...SO I MADE IT");
+            IEAIAIO.mkdir();
+        }
 
         File [] files = new File(fromPath).listFiles();
 
